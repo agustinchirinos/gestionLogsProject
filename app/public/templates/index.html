@@ -5,4 +5,12 @@
     <h1 class="display-4">Tema 3</h1>
     <p>Gestión de Errores y Logs</p>
 </div>
+    {% if msg %}
+        {{ msg }}
+    {% endif %}
+    <form method="post">
+        {{ recaptcha }}
+        <input type="submit" value="Validar">
+    </form>
+
 {% endblock %}

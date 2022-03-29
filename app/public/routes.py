@@ -1,11 +1,17 @@
-from flask import render_template
+from flask import render_template, request
 
 import app
 from . import public
 
 
 
-@public.route('/')
+@public.route('/', methods=["GET","POST"])
 def index():  # put application's code here
     app.logger.info("Mensaje de información")
-    return render_template('index.html')
+    msg = ""
+    if request.method == "POST":
+        if app.recaptcha.verify():
+            msg = "Eres un humano"
+        else:
+            msg = "No eres un humano"
+    return render_template('index.html', msg=msg)
